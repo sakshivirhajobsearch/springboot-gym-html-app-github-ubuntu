@@ -1,4 +1,4 @@
-name: Build and Run Spring Boot App on Windows
+name: Build and Run Spring Boot App on ubuntu
 
 on:
   push:
