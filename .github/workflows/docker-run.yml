@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-run:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -26,20 +26,14 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-        shell: cmd
 
       - name: Run Spring Boot app
-        run: java -jar target\springboot-gym-html-app-1.0.0.jar
-        shell: cmd
+        run: java -jar target/springboot-gym-html-app-1.0.0.jar
 
-    # You can simulate post build success/failure using the job outputs or simply add an additional step
-    # Here is a simple approach with a success message step:
       - name: Success message
         if: success()
-        run: echo "✅ Spring Boot app is running locally!"
-        shell: cmd
+        run: echo "Spring Boot app is running locally!"
 
       - name: Failure message
         if: failure()
-        run: echo "❌ Build failed!"
-        shell: cmd
+        run: echo "Build failed!"
