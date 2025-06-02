@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          ref: main
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -28,12 +26,12 @@ jobs:
         run: mvn clean install
 
       - name: Run Spring Boot app
-        run: java -jar target/springboot-gym-html-app-1.0.0.jar
+        run: java -jar target/springboot-gym-html-app-github-ubuntu-1.0.0.jar
 
       - name: Success message
         if: success()
-        run: echo "Spring Boot app is running locally!"
+        run: echo " Spring Boot app is running successfully!"
 
       - name: Failure message
         if: failure()
-        run: echo "Build failed!"
+        run: echo " Build or run failed!"
