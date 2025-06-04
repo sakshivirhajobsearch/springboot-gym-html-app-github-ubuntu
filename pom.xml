@@ -6,12 +6,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>springboot-gym-html-app-github-windows</artifactId>
+    <artifactId>springboot-gym-html-app-github-ubuntu</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>Spring Boot Gym HTML App</name>
-    <description>springboot-gym-html-app-github-windows with Thymeleaf frontend</description>
+    <description>springboot-gym-html-app-github-ubuntu with Thymeleaf frontend</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
