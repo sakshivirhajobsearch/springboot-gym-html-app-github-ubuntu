@@ -7,7 +7,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>springboot-gym-html-app-github-ubuntu</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>Spring Boot Gym HTML App</name>
@@ -17,7 +17,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.4</version>
-        <relativePath/> <!-- Lookup from Maven Central -->
+        <relativePath /> <!-- Lookup from Maven Central -->
     </parent>
 
     <properties>
@@ -25,6 +25,7 @@
     </properties>
 
     <dependencies>
+
         <!-- Spring Web (REST, Controllers, etc.) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -43,6 +44,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -50,14 +58,23 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/sakshivirhajobsearch/springboot-gym-html-app-github-ubuntu</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/sakshivirhajobsearch/springboot-gym-html-app-github-ubuntu</url>
+        </repository>
+    </repositories>
+
 </project>
