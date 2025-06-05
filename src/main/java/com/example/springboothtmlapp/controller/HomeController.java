@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
-	@GetMapping("/hello")
-	public String sayHello() {
-		return "hello";
+	@GetMapping("/home")
+	public String home() {
+		return "home"; // Thymeleaf looks for home.html in templates folder
 	}
-
 }
