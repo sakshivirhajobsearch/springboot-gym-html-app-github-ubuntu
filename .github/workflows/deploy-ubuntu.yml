@@ -1,4 +1,4 @@
-name: Spring Boot Build and Run on ubuntu
+name: Spring Boot Build and Run on Ubuntu
 
 on:
   push:
@@ -8,11 +8,7 @@ on:
 
 jobs:
   build-and-run:
-    runs-on: self-hosted  # Ensure it's your ubuntu 11 runner
-
-    env:
-      JAVA_HOME: 'C:\\Program Files\\Java\\jdk-17'
-      # Do NOT reference env.PATH here – instead use PATH override directly in steps if needed
+    runs-on: self-hosted  # Make sure this is your Ubuntu 22.04 runner
 
     steps:
       - name: Checkout Repository
@@ -24,19 +20,20 @@ jobs:
           maven-version: '3.9.6'
 
       - name: Build with Maven
-        shell: cmd
         run: mvn clean install
 
       - name: Run Spring Boot Application
-        shell: cmd
-        run: java -jar target\\springboot-gym-html-app-github-ubuntu-1.0.1-SNAPSHOT.jar
+        run: |
+          nohup java -jar target/springboot-gym-html-app-github-ubuntu-1.0.1-SNAPSHOT.jar > app.log 2>&1 &
+          sleep 10
+
+      - name: Test Application Endpoint
+        run: curl --fail http://localhost:9090/home.html
 
       - name: Success Message
         if: success()
-        shell: cmd
-        run: echo Spring Boot app is running locally!
+        run: echo "Spring Boot app is running locally!"
 
       - name: Failure Message
         if: failure()
-        shell: cmd
-        run: echo Build failed!
+        run: echo "Build or run failed!"
