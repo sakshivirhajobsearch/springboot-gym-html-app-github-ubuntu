@@ -2,17 +2,15 @@ name: Spring Boot Build and Run on Ubuntu
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
   build-and-run:
-    runs-on: self-hosted  # Make sure this is your Ubuntu 22.04 runner
+    runs-on: self-hosted
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Maven
         uses: stCarolas/setup-maven@v4
@@ -22,18 +20,21 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
-      - name: Run Spring Boot Application
+      - name: Run Spring Boot App (keep alive)
+        env:
+          RUNNER_TRACKING_ID: 0
         run: |
-          nohup java -jar target/springboot-gym-html-app-github-ubuntu-1.0.1-SNAPSHOT.jar > app.log 2>&1 &
+          nohup java -jar target/springboot-gym-html-app-github-ubuntu-1.0.1-SNAPSHOT.jar \
+            --server.port=9090 > app.log 2>&1 &
           sleep 10
 
-      - name: Test Application Endpoint
+      - name: Test Endpoint
         run: curl --fail http://localhost:9090/home.html
 
-      - name: Success Message
+      - name: Success
         if: success()
-        run: echo "Spring Boot app is running locally!"
+        run: echo "App is up on port 9090!"
 
-      - name: Failure Message
+      - name: Failure
         if: failure()
-        run: echo "Build or run failed!"
+        run: echo "Build or server startup failed!"
